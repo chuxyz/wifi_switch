@@ -23,13 +23,15 @@ class ControlSwitch extends StatelessWidget {
         String switchLevel = value ? 'H' : 'L';
         _channel.sink.add(switchLevel);
       },
-      width: 125.0,
-      height: 55.0,
-      valueFontSize: 25.0,
-      toggleSize: 45.0,
-      borderRadius: 30.0,
+      width: 200.0,
+      height: 100.0,
+      valueFontSize: 45.0,
+      toggleSize: 85.0,
+      borderRadius: 60.0,
       padding: 8.0,
       showOnOff: true,
+      activeColor: Colors.orange.shade800,
+      inactiveColor: Colors.red.shade800,
     );
   }
 }
