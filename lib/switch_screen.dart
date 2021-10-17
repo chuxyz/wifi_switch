@@ -21,9 +21,11 @@ class _SwitchScreenState extends State<SwitchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _channel = WebSocketChannel.connect(Uri.parse("ws://192.168.4.1/ws"));
+    if (_connectivityResult == ConnectivityResult.wifi) {
+      _channel = WebSocketChannel.connect(Uri.parse("ws://192.168.4.1/ws"));
+    }
     double mediaHeight = MediaQuery.of(context).size.height;
-    print(mediaHeight);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('WiFi Switch'),
@@ -35,8 +37,7 @@ class _SwitchScreenState extends State<SwitchScreen> {
             StreamBuilder(
               stream: _channel.stream,
               builder: (context, snapshot) {
-                return (!snapshot.hasData &&
-                        _connectivityResult == ConnectivityResult.wifi)
+                return (snapshot.hasData && _connectivityResult == ConnectivityResult.wifi)
                     ? Column(
                         children: [
                           ListTile(
@@ -132,7 +133,7 @@ class _SwitchScreenState extends State<SwitchScreen> {
                             children: [
                               Text('Connect to WiFi: '),
                               Text(
-                                'WiFiSwitch,',
+                                'WiFiSwitch',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -152,7 +153,7 @@ class _SwitchScreenState extends State<SwitchScreen> {
   @override
   void initState() {
     super.initState();
-    //_channel = WebSocketChannel.connect(Uri.parse("ws://192.168.4.1/ws"));
+    _channel = WebSocketChannel.connect(Uri.parse("ws://192.168.4.1/ws"));
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
       setState(() {

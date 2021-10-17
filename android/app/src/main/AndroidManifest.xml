@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wifi_switch">
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="Wifi Switch"
         android:icon="@mipmap/ic_launcher">
